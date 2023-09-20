@@ -86,22 +86,5 @@ Bitcoin Key Derivation
 Analogous to trezor 
 https://trezor.io/learn/a/what-is-bip32
 
-Bitcoin key derivation presents you with a dilemma. There are two bonus features: hardening, and xpub keys. Without hardening, a single private key and xpub, or two private keys, are able to decrypt the entire master key. With hardening, the xpub is useless, can't be used to derive individual keys. This seems like a dilemma.
-
-With IBE, we can fix this.
-
-In every case, the XPUB and XPRV are the master public key and master secret key respectively. 
-- Normal Key Derivation path example: m/44/0/0/....
- XPUB can be used to derive the public key for each path.
- priv_i can be used to derive other sibling private keys priv_j
-
-- Key Derivation path: m/44'/0'/0'/....
- XPUB can NOT be used to derive the private key for each path. It's necessary to use XPRV even to derive the public keys.
- The individual private keys priv_i are isolated.
-
-- Proposed IBS Derivation path: m/44*/0*/0*/...
-
-  XPUB can be used to derive the public key for each path.
-  priv_i  
 
 """
