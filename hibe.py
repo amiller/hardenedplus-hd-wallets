@@ -21,7 +21,6 @@ for i in range(DEPTH):
 
 class HIBE():
     def __init__(self):
-        # We'll just need one generator
         pass
     
     def setup(self, seed=None):
@@ -42,11 +41,6 @@ class HIBE():
         a1 = g ** r
         bs = [h ** r for h in hgens[k:]]
         return (a0,a1) + tuple(bs)
-
-    def precompute_pub(self, mpk, ID):
-        # Returns a randomized
-        # h1^ I(1,1)...h_L2^(1,L2),
-        pass
 
     def encrypt(self, mpk, ID, msg, seed=None):
         k = len(ID)
@@ -119,29 +113,3 @@ priv4 = hibe.derive_child(priv3, [0x44,0x0,0x1,0x2])
 msg3 = hibe.decrypt(priv4, [0x44,0x0,0x1,0x2], ct)
 assert(msg3 == msg)
 print('Hierarchical Decryption and Original Message match: OK')
-
-# Analogous to trezor 
-# https://trezor.io/learn/a/what-is-bip32
-
-# III. Forward Secrecy using HIBE
-
-"""
-   The basic idea is we treat epoch as a timestamp, in a binary tree
-   m/0*/0*/1*/0*/.../1*/1*
-   Each timestamp corresponds to a path in this tree.
-
-   At any given time, a collection of derived keys define a "decryption forest",
-   since they can be used to decrypt any message addressed to a leaf in this range
-
-   We can "ratchet" forward by dropping keys in a tree structure.
-"""
-def keygen():
-    # The initial key is simply a root key from IBS
-    pass
-    
-def derive(xpub, path):
-    # Parse path as m/[purpose]*/[cointype]*/[account]*/[index]*
-
-    # The point is that purpose and cointype are hidden.
-    # For each one of these we should derive a child key.
-    pass

@@ -51,5 +51,8 @@ RUN pip install ipython
 WORKDIR /root
 
 ADD hibe.py hibe.py
+ADD hibd.py hibd.py
+ADD chch.py chch.py
+ADD README.md README.md
 
-CMD python hibe.py
+CMD python hibd.py
