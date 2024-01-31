@@ -17,6 +17,8 @@ Hardened keys use a different path identifier, like `m/44'/0'/0'/...`, where har
 
 Identity Based Cryptography is a useful way to approach this problem. The proposal is to define a signature scheme supporting derivation paths such as `m/44*/0*/0*` which support both _hardening_ as well as useful `xpub` keys.
 
+![table summarizing HD wallets and IBE](img/table.png)
+
 There is a general approach to key distribution that works for hierarchical encryption and digital signatures like this, based on pairings. [(BBG05)](https://eprint.iacr.org/2005/015)
 This is ordinarily presented for hierarchical ID based encryption, but there is a generic transformation from HIBE encryption to signatures [(GS02)](https://eprint.iacr.org/2002/056), so we implement that here.
 
@@ -26,9 +28,11 @@ Because this uses pairing, it cannot be implemented using `secp256k1`, but might
 
 See [./hibe.py](./hibe.py) for an implementation of hierarchical identity based encryption
 
-## Hierarchical ID Based signatures from Cha-Cheon signatures.
+## Hierarchical ID Based signatures based on BBG05
 
-See [./hibd.py](./hibd.py) for an implementation of the proposed `m/44*/0*/0*/...` "hardened plus xpub"
+See [./hardenedplus.py](./hardenedplus.py) for an implementation of the proposed `m/44*/0*/0*/...` "hardened plus xpub"
+
+## 
 
 
 ## Setup

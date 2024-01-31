@@ -1,10 +1,5 @@
 FROM python:3.8.0-buster AS charm
 
-# Get the Dockerfile from here
-# https://raw.githubusercontent.com/sbellem/docker-charm-crypto/master/latest/python3.8/buster/Dockerfile
-# docker build -f docker-charm-crypto/master/latest/python3.8/buster/Dockerfile -t charm .
-ENV PYTHONUNBUFFERED 1
-
 RUN apt-get update && apt-get install -y --no-install-recommends \
                 bison \
                 flex \
@@ -14,7 +9,8 @@ ENV LIBRARY_PATH /usr/local/lib
 ENV LD_LIBRARY_PATH /usr/local/lib
 ENV LIBRARY_INCLUDE_PATH /usr/local/include
 
-# PBC
+# PBC  - here we are using a pre-built dependency for PBC.
+# TODO: It still remains to clean this up, see https://github.com/initc3/docker-pbc
 COPY --from=initc3/pbc:0.5.14-buster \
                 /usr/local/include/pbc \
                 /usr/local/include/pbc
@@ -51,8 +47,7 @@ RUN pip install ipython
 WORKDIR /root
 
 ADD hibe.py hibe.py
-ADD hibd.py hibd.py
-ADD chch.py chch.py
+ADD hardenedplus.py hardenedplus.py
 ADD README.md README.md
 
-CMD python hibd.py
+CMD python hardenedplus.py

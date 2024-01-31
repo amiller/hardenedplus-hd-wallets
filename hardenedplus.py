@@ -1,8 +1,6 @@
 from charm.toolbox.pairinggroup import PairingGroup,ZR,G1,G2,GT,pair
 from hibe import HIBE, group, ZR, g
 
-###### I. HIBE (BBG05) from Boneh Boyen Goh 2005
-
 """
 Hierarchical ID Based Digital signatures from BBG05
 ===
@@ -19,6 +17,9 @@ The basic idea is the following: For a signing key of path depth D, we create a 
 
 The signature is simply the BBG leaf decryption key derived from that message hash.
 To verify the signature, we can just check that the decryption works successfully.
+
+The key derivation format is analogous to BIP32
+https://trezor.io/learn/a/what-is-bip32
 """
 
 DEPTH=3
@@ -52,11 +53,12 @@ class HIBD():
         M2 = self.hibe.decrypt(sig, tuple(ID)+(mm,), CT)
         assert M2 == M
 
+
+
 hibd = HIBD()
 (xpub, xpriv) = hibd.setup(seed=0xcafeee)
 print('xpub:',xpub)
 print('xpriv:',xpriv)
-
 
 # Keygen for signing
 priv = hibd.keygen(xpriv, [0x44,0x0,0x0])
@@ -78,13 +80,3 @@ except AssertionError:
 else:
     assert False, 'failed?'
     
-
-"""
-Bitcoin Key Derivation
-===
-
-Analogous to trezor 
-https://trezor.io/learn/a/what-is-bip32
-
-
-"""

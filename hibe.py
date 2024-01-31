@@ -1,11 +1,15 @@
 import charm
 
-###### I. HIBE (BBG05) from Boneh Boyen Goh 2005 
+"""
+Hierarchical ID Based Digital signatures from BBG05
+===
+
+[1] HIBE (BBG05) from Boneh Boyen Goh 2005 
+"""
 
 ## Our setting is a symmetric bilinear group
 from charm.toolbox.pairinggroup import PairingGroup,ZR,G1,G2,GT,pair
 from charm.schemes.pksig.pksig_chch import CHCH
-
 group = PairingGroup('SS512')    
 
 H1 = lambda x: group.hash(x, G1)
